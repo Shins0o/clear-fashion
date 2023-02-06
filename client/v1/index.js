@@ -193,7 +193,7 @@ const quantile = (arr, q) => {
         return sorted[base];
     }
 };
-console.log(quantile(brands['hast'],0.90))
+//console.log(quantile(brands['hast'],0.90))
 for (const x of Object.keys(brands)){
   //console.log('La valeur p90 pour la marque ' + x + ' est :' + quantile(brands[x],0.90));
   //console.log(quantile(brands[x],0.90))
@@ -390,18 +390,61 @@ const COTELE_PARIS = [
 // 🎯 TODO 1: New released products
 // // 1. Log if we have new products only (true or false)
 // // A new product is a product `released` less than 2 weeks.
+for (const x of COTELE_PARIS){
+  var date1 = new Date(x.released);
+  var date2 = new Date();
+  var diffTime = Math.abs(date2 - date1);
+  var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  if (diffDays<15){ //doesn't seem to work
+    flag = false;
+    console.log("new product: " + x);
+  }
+};
+
+
 
 // 🎯 TODO 2: Reasonable price
 // // 1. Log if coteleparis is a reasonable price shop (true or false)
 // // A reasonable price if all the products are less than 100€
+var flag = true;
+for (const x of COTELE_PARIS){
+  if (x.price>100){
+    flag = false;
+    console.log("reasonable price shop: "+flag);
+    break;
+  }
+};
+if (flag==true){
+  console.log("reasonable price shop: " + flag);
+}
 
 // 🎯 TODO 3: Find a specific product
 // 1. Find the product with the uuid `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`
+for (const x of COTELE_PARIS){
+  if (x.uuid ==`2b9a47e3-ed73-52f6-8b91-379e9c8e526c`){
+    var produit = x;
+  }
+}
 // 2. Log the product
+console.log(produit);
 
 // 🎯 TODO 4: Delete a specific product
 // 1. Delete the product with the uuid `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`
+// JavaScript to illustrate filter() method
+function isWantedProduct( value ) {
+  return value.uuid == `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`;
+}
+
+//var filtered = COTELE_PARIS.filter( isWantedProduct );
+for (var i=0;i<COTELE_PARIS.length;i++){
+  if (COTELE_PARIS[i].uuid == `2b9a47e3-ed73-52f6-8b91-379e9c8e526c`){
+    delete COTELE_PARIS[i];
+  }
+}
+
 // 2. Log the new list of product
+console.log(COTELE_PARIS);
+
 
 // 🎯 TODO 5: Save the favorite product
 // We declare and assign a variable called `blueJacket`
@@ -424,8 +467,10 @@ let jacket = blueJacket;
 jacket.favorite = true;
 
 // 1. Log `blueJacket` and `jacket` variables
+console.log(blueJacket);
+console.log(jacket);
 // 2. What do you notice?
-
+//Everything is the same except for the favorite property added to the jacket object
 // we make a new assignment again
 blueJacket = {
   'link':
@@ -440,7 +485,7 @@ blueJacket = {
 };
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
-
+// blueJacket properties remain unchanged
 /**
  * 🎬
  * The End: last thing to do
@@ -449,4 +494,6 @@ blueJacket = {
 
 // 🎯 LAST TODO: Save in localStorage
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
+localStorage.setItem(MY_FAVORITE_BRANDS,MY_FAVORITE_BRANDS);
 // 2. log the localStorage
+console.log(localStorage);
