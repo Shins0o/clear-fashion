@@ -49,15 +49,15 @@ console.log('cheapest_link :' + cheapest_link);
 // 1. Create a variable and assign it the number of products
 var num_products = marketplace.length;
 // 2. Log the variable
-console.log('nombre de produits: ' + num_products);
+console.log('number of products: ' + num_products);
 
 // 🎯 TODO 3: Brands name
 // 1. Create a variable and assign it the list of brands name only
 var brand_names = ['panafrica','hast','loom'];
 // 2. Log the variable
-console.log('liste de nom des marques: ' + brand_names);
+console.log('list of brand names: ' + brand_names);
 // 3. Log how many brands we have
-console.log('nombre de marque :' + brand_names.length);
+console.log('number of brands :' + brand_names.length);
 
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -70,7 +70,7 @@ function sortByPriceHighestToLowest(liste){
 // 2. Create a variable and assign it the list of products by price from lowest to highest
 var price_lowest_to_highest = sortByPriceLowestToHighest(marketplace);
 // 3. Log the variable
-console.log('array trié du moins cher au plus cher: ')
+console.log('array sorted by from lowest to highest price: ')
 console.log(price_lowest_to_highest);
 
 // 🎯 TODO 5: Sort by date
@@ -93,7 +93,7 @@ var newarray =marketplace.filter(function(el)
 }
 );
 // 2. Log the list
-console.log('array filtré: ')
+console.log('filtered array: ')
 console.log(newarray);
 
 // 🎯 TODO 7: Average price
@@ -106,7 +106,7 @@ for (const x of marketplace) {
 }
 const average = sumPrice/count;
 // 2. Log the average
-console.log('moyenne de prix = ' + average);
+console.log('average price = ' + average);
 
 /**
  * 🏎
@@ -146,7 +146,7 @@ console.log('brands : ');
 console.log(brands);
 // 3. Log the number of products by brands
 for (const x of Object.keys(brands)){
-  console.log('Nombre de produits pour la marque ' + x + ': ' + brands[x].length);
+  console.log('Number of products for the brand ' + x + ': ' + brands[x].length);
 };
 
 // 🎯 TODO 9: Sort by price for each brand
@@ -156,7 +156,7 @@ for (const x of Object.keys(brands)){
 }
 // 2. Log the sort
 for (const x of Object.keys(brands)){
-  console.log('Tri pour la marque: ' + x + ': ');
+  console.log('sorted by brand: ' + x + ': ');
   console.log(brands[x]);
 };
 
