@@ -26,6 +26,7 @@ const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+const selectBrand = document.querySelector('#brand-select')
 
 /**
  * Set global value
@@ -95,12 +96,55 @@ const renderPagination = pagination => {
   const {currentPage, pageCount} = pagination;
   const options = Array.from(
     {'length': pageCount},
-    (value, index) => `<option value="${index + 1}">${index + 1}</option>`
+    (value, index) => `<option value="${index + 1}">${index + 1} </option>`
   ).join('');
 
   selectPage.innerHTML = options;
-  selectPage.selectedIndex = currentPage - 1;
+  selectPage.selectedIndex = currentPage  - 1;
 };
+
+/**
+ * Render page selector
+ * @param {Object} brandFilter
+ */
+const fetchBrands = async () => {
+  try {
+    const response = await fetch(
+      `https://clear-fashion-api.vercel.app/brands`
+    );
+    const body = await response.json();
+
+    if (body.success !== true) {
+      console.error(body);
+      return null;
+    }
+
+    return body.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+const currentBrands = fetchBrands();
+const renderBrandFilter = brandFilter => {
+  const {currentBrands} = brandFilter;
+  const options = Array.from(
+    {'length': currentBrands.length},
+    (value,index) => `<option value="${value}">${value} </option>`
+  ).join('');
+  selectBrand.innerHTML = options;
+  selectBrand.selectedIndex = brandFilter;
+}
+/*const renderPagination = pagination => {
+  const {currentPage, pageCount} = pagination;
+  const options = Array.from(
+    {'length': pageCount},
+    (value, index) => `<option value="${index + 1}">${index + 1} </option>`
+  ).join('');
+
+  selectPage.innerHTML = options;
+  selectPage.selectedIndex = currentPage  - 1;
+};*/
 
 /**
  * Render page selector
@@ -127,14 +171,25 @@ const render = (products, pagination) => {
  */
 selectShow.addEventListener('change', async (event) => {
   const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});
+
+selectPage.addEventListener('change', async (event) => {
+  const products = await fetchProducts(parseInt(event.target.value), currentPagination.pageSize);
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 });
 
+selectBrand.addEventListener('change', async (event) => {
+  const products = await fetch
+});
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
 
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 });
+
+
